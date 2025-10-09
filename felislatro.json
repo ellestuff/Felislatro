@@ -1,0 +1,14 @@
+{
+	"id": "felislatro",
+	"name": "(18+) felislatro.",
+	"author": ["ellestuff."],
+	"description": "Avert your eyes, kids~",
+	"prefix": "felis",
+	"badge_colour": "ff53a9",
+	"dependencies": [
+		"ellejokers (>=0.0.3*)",
+		"Steamodded (>=1.0.0~ALPHA-1404b)"
+	],
+	"main_file": "main.lua",
+	"version": "0.0.1"
+}
