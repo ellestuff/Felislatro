@@ -1,14 +1,15 @@
 {
 	"id": "felislatro",
 	"name": "(18+) felislatro.",
-	"author": ["ellestuff."],
-	"description": "Avert your eyes, kids~",
+	"author": ["slimestuff."],
+	"description": "Avert your eyes, kids, we're getting silly over here~",
 	"prefix": "felis",
 	"badge_colour": "ff53a9",
 	"dependencies": [
-		"ellejokers (>=0.0.3*)",
+		"ellejokers (>=0.1.0)",
 		"Steamodded (>=1.0.0~ALPHA-1404b)"
 	],
 	"main_file": "main.lua",
-	"version": "0.0.1"
+	"version": "0.0.1",
+	"priority": 1
 }
