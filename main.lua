@@ -20,9 +20,11 @@ SMODS.Atlas {
 	-- planing on adding sophie sfx
 
 felis_sophie_scaling = {
+	function(mult,mod) return 0 end,
 	function(mult,mod) return math.floor(math.sqrt(to_number(mult)/(100*mod))) end,
 	function(mult,mod) return to_number(mult/mod)<1 and 0 or math.floor(math.sqrt(to_number(math.log(mult/mod)/2))) end,
-	function(mult,mod) return to_number(mult/mod)<1 and 0 or math.floor(math.sqrt(to_number(math.log(math.log(mult/mod))))) end
+	function(mult,mod) return to_number(mult/mod)<1 and 0 or math.floor(math.sqrt(to_number(math.log(math.log(mult/mod))))) end,
+	function(mult,mod) return to_number(mult/mod)<1 and 0 or math.floor(math.sqrt(to_number(math.log(math.log(math.log(mult/mod)))))) end
 }
 
 -- Add sophie stuff
@@ -85,7 +87,7 @@ SMODS.current_mod.config_tab = function()
 		}),
 		create_option_cycle({opt_callback = "conf_felis_soph_scaling",
 			label = "Sophie Scaling",
-			options = {"Vanilla - sqrt(mult/100)", "Extreme - sqrt(log(mult)/2)", "Cryptid - sqrt(log(log(mult)))"},
+			options = {"Off", "Vanilla - sqrt(mult/100)", "Extreme - sqrt(log(mult)/2)", "Cryptid - sqrt(log(log(mult)))", "WTF - sqrt(log#3(mult))"},
 			current_option = config.sophie.scaling,
 			scale = 0.8,
 			info = {
