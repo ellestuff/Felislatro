@@ -1,6 +1,6 @@
 return {
-	sophie = {
-		scaling = 1,
-		censor = 1
-	}
+	scaling_art = {
+		sophie = true
+	},
+	censor = 1
 }
