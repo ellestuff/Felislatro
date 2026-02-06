@@ -1,9 +1,6 @@
 local config = SMODS.current_mod.config
 
 censor_suffix = {".png", "_censored.png", "_featureless.png"}
-joker_atlases = {
-	"sophie"
-}
 
 --		[[ Atlases ]]
 SMODS.Atlas {
@@ -13,30 +10,34 @@ SMODS.Atlas {
 	py = 95,
 }
 
-for _,v in ipairs(joker_atlases) do
-	SMODS.Atlas {
-		key = v,
-		path = v..censor_suffix[config.censor],
-		px = 71, py = 95
-	}
-end
+SMODS.Atlas {
+	key = "sophie",
+	path = "sophie"..censor_suffix[config.censor],
+	px = 71, py = 95
+}
 
 --		[[ Sounds ]]
 -- planing on adding sfx
 
 -- Add sophie stuff
 SMODS.Joker:take_ownership('elle_sophie', {
-	atlas = 'sophie',
-	pos = { x = 0, y = 0 },
-	soul_pos = { x = 1, y = 0 },
-	update = function(self, card, dt) card.children.floating_sprite:set_sprite_pos({x = math.min(config.scaling_art.sophie and card.ability.extra.charges+1 or 1,7), y = 0}) end
+	--soul_pos = {x = 0, y = 0, draw = function(card, scale_mod, rotate_mod) slimeutils.large_soul.draw(card, scale_mod, rotate_mod) end},
+	update = function(self, card, _front)
+		card.children.floating_sprite.atlas = G.ASSET_ATLAS.felis_sophie
+		card.children.floating_sprite:set_sprite_pos({x = math.min(config.scaling_art.sophie and card.ability and card.ability.extra.charges or 0,6), y = 0})
+		--slimeutils.large_soul.update(self, card)
+	end
 }, true)
+
 SMODS.Joker:take_ownership('elle_fallen', {
-	atlas = 'sophie',
-	pos = { x = 0, y = 1 },
-	soul_pos = { x = 1, y = 1 },
-	update = function(self, card, dt) card.children.floating_sprite:set_sprite_pos({x = math.min(config.scaling_art.sophie and card.ability.extra.charges+1 or 1,7), y = 1}) end
+	--soul_pos = {x = 0, y = 0, draw = function(card, scale_mod, rotate_mod) slimeutils.large_soul.draw(card, scale_mod, rotate_mod) end},
+	update = function(self, card, _front)
+		card.children.floating_sprite.atlas = G.ASSET_ATLAS.felis_sophie
+		card.children.floating_sprite:set_sprite_pos({x = math.min(config.scaling_art.sophie and card.ability and card.ability.extra.charges or 0,6), y = 1})
+		--slimeutils.large_soul.update(self, card)
+	end
 }, true)
+
 
 SMODS.Joker:take_ownership('elle_spearlamp', {
 	atlas = 'jokers',
@@ -80,6 +81,6 @@ local function sophie_scaling()
 end
 
 -- Make elle joker use alt account's follower count
--- Commented out since i feel like it buffs the joker to numberslop levels :p
+-- Commented out since i feel like it buffs the joker too much lol
 --elle_bsky_did = "did:plc:reab4i3ugbxy53chfs34dwhw"
 --elle_update_follower_count()
