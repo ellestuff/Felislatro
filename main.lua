@@ -23,19 +23,19 @@ SMODS.Atlas {
 SMODS.Joker:take_ownership('elle_sophie', {
 	--soul_pos = {x = 0, y = 0, draw = function(card, scale_mod, rotate_mod) slimeutils.large_soul.draw(card, scale_mod, rotate_mod) end},
 	update = function(self, card, _front)
-		card.children.floating_sprite.atlas = G.ASSET_ATLAS.felis_sophie
 		card.children.floating_sprite:set_sprite_pos({x = math.min(config.scaling_art.sophie and card.ability and card.ability.extra.charges or 0,6), y = 0})
 		--slimeutils.large_soul.update(self, card)
-	end
+	end,
+	set_sprites = function(self, card, front) card.children.floating_sprite.atlas = G.ASSET_ATLAS.felis_sophie end
 }, true)
 
 SMODS.Joker:take_ownership('elle_fallen', {
 	--soul_pos = {x = 0, y = 0, draw = function(card, scale_mod, rotate_mod) slimeutils.large_soul.draw(card, scale_mod, rotate_mod) end},
 	update = function(self, card, _front)
-		card.children.floating_sprite.atlas = G.ASSET_ATLAS.felis_sophie
 		card.children.floating_sprite:set_sprite_pos({x = math.min(config.scaling_art.sophie and card.ability and card.ability.extra.charges or 0,6), y = 1})
 		--slimeutils.large_soul.update(self, card)
-	end
+	end,
+	set_sprites = function(self, card, front) card.children.floating_sprite.atlas = G.ASSET_ATLAS.felis_sophie end
 }, true)
 
 
@@ -74,10 +74,6 @@ end
 
 function G.FUNCS.conf_felis_censor(args)
 	config.censor = args.cycle_config.current_option
-end
-
-local function sophie_scaling()
-	config.scaling_art.sophie = not config.scaling_art.sophie
 end
 
 -- Make elle joker use alt account's follower count
