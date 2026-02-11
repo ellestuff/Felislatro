@@ -50,7 +50,7 @@ local function quick_resprite(key,pos)
 	}, true)
 end
 quick_resprite('elle_vivian', { x = 0, y = 0 })
-quick_resprite('elle_feri', { x = 21, y = 0 })
+quick_resprite('elle_feri', { x = 1, y = 0 })
 
 SMODS.Joker:take_ownership('elle_spearlamp', {
 	atlas = 'lamps'
