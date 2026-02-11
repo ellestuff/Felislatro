@@ -15,6 +15,11 @@ SMODS.Atlas {
 	path = "sophie"..censor_suffix[config.censor],
 	px = 71, py = 95
 }
+SMODS.Atlas {
+	key = "lamps",
+	path = "lamps.png",
+	px = 71, py = 95
+}
 
 --		[[ Sounds ]]
 -- planing on adding sfx
@@ -38,14 +43,17 @@ SMODS.Joker:take_ownership('elle_fallen', {
 	set_sprites = function(self, card, front) card.children.floating_sprite.atlas = G.ASSET_ATLAS.felis_sophie end
 }, true)
 
+local function quick_resprite(key,pos)
+	SMODS.Joker:take_ownership(key, {
+		atlas = 'jokers',
+		pos = pos
+	}, true)
+end
+quick_resprite('elle_vivian', { x = 0, y = 0 })
+quick_resprite('elle_feri', { x = 21, y = 0 })
 
 SMODS.Joker:take_ownership('elle_spearlamp', {
-	atlas = 'jokers',
-	pos = { x = 1, y = 0 }
-}, true)
-SMODS.Joker:take_ownership('elle_vivian', {
-	atlas = 'jokers',
-	pos = { x = 0, y = 0 }
+	atlas = 'lamps'
 }, true)
 
 --		[[ Config ]]
