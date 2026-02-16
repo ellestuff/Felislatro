@@ -55,11 +55,12 @@ SMODS.Joker:take_ownership('elle_spearlamp', {
 	atlas = 'lamps'
 }, true)
 
+-- iterating backwards to make sure things get removed correctly
 local remove_puritan = {
 	j_elle_feri = true
 }
-for i, v in ipairs(ellejokers.puritan_cards) do
-	if remove_puritan[v] then v = nil end
+for i=#ellejokers.puritan_cards,1,-1 do
+	if remove_puritan[ellejokers.puritan_cards[i]] then table.remove(ellejokers.puritan_cards,i) end
 end
 
 --		[[ Config ]]
