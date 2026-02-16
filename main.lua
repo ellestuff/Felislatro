@@ -55,6 +55,13 @@ SMODS.Joker:take_ownership('elle_spearlamp', {
 	atlas = 'lamps'
 }, true)
 
+local remove_puritan = {
+	j_elle_feri = true
+}
+for i, v in ipairs(ellejokers.puritan_cards) do
+	if remove_puritan[v] then v = nil end
+end
+
 --		[[ Config ]]
 SMODS.current_mod.config_tab = function()
 	return {n = G.UIT.ROOT, config = {
