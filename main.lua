@@ -24,11 +24,15 @@ SMODS.Atlas {
 --		[[ Sounds ]]
 -- planing on adding sfx
 
+local function soph_x(card)
+	return math.min(config.scaling_art.sophie and card.ability and card.ability.extra.charges or 0,6)
+end
+
 -- Add sophie stuff
 SMODS.Joker:take_ownership('elle_sophie', {
 	--soul_pos = {x = 0, y = 0, draw = function(card, scale_mod, rotate_mod) slimeutils.large_soul.draw(card, scale_mod, rotate_mod) end},
 	update = function(self, card, _front)
-		card.children.floating_sprite:set_sprite_pos({x = math.min(config.scaling_art.sophie and card.ability and card.ability.extra.charges or 0,6), y = 0})
+		card.children.floating_sprite:set_sprite_pos({x = soph_x(card), y = config.scaling_art.sophie})
 		--slimeutils.large_soul.update(self, card)
 	end,
 	set_sprites = function(self, card, front) card.children.floating_sprite.atlas = G.ASSET_ATLAS.felis_sophie end
@@ -37,7 +41,7 @@ SMODS.Joker:take_ownership('elle_sophie', {
 SMODS.Joker:take_ownership('elle_fallen', {
 	--soul_pos = {x = 0, y = 0, draw = function(card, scale_mod, rotate_mod) slimeutils.large_soul.draw(card, scale_mod, rotate_mod) end},
 	update = function(self, card, _front)
-		card.children.floating_sprite:set_sprite_pos({x = math.min(config.scaling_art.sophie and card.ability and card.ability.extra.charges or 0,6), y = 1})
+		card.children.floating_sprite:set_sprite_pos({x = soph_x(card), y = 1})
 		--slimeutils.large_soul.update(self, card)
 	end,
 	set_sprites = function(self, card, front) card.children.floating_sprite.atlas = G.ASSET_ATLAS.felis_sophie end
@@ -89,6 +93,33 @@ end
 
 function G.FUNCS.conf_felis_censor(args)
 	config.censor = args.cycle_config.current_option
+end
+
+SMODS.current_mod.menu_cards = function()
+    return {
+		{
+			key = "j_elle_fallen",
+			no_edition = true,
+			
+		},
+		
+		func = function()
+			for k, v in pairs(G.title_top.cards) do
+				if v.config.center.key == 'j_elle_fallen' and config.scaling_art.sophie then
+					G.E_MANAGER:add_event(Event{delay = 2, func=function()
+						for i = 1, 6, 1 do
+							G.E_MANAGER:add_event(Event{trigger="after",delay = .5+(i-1)*.1, func=function()
+								v.ability.extra.charges = v.ability.extra.charges+1
+								v:juice_up()
+								play_sound(i==6 and "tarot1" or "tarot2")
+							return true end})
+						end
+					return true end})
+					
+				end
+			end
+		end
+	}
 end
 
 -- Make elle joker use alt account's follower count
