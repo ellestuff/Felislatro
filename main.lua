@@ -32,7 +32,7 @@ end
 SMODS.Joker:take_ownership('elle_sophie', {
 	--soul_pos = {x = 0, y = 0, draw = function(card, scale_mod, rotate_mod) slimeutils.large_soul.draw(card, scale_mod, rotate_mod) end},
 	update = function(self, card, _front)
-		card.children.floating_sprite:set_sprite_pos({x = soph_x(card), y = config.scaling_art.sophie})
+		card.children.floating_sprite:set_sprite_pos({x = soph_x(card), y = 0})
 		--slimeutils.large_soul.update(self, card)
 	end,
 	set_sprites = function(self, card, front) card.children.floating_sprite.atlas = G.ASSET_ATLAS.felis_sophie end
