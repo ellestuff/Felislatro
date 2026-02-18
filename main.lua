@@ -95,27 +95,44 @@ function G.FUNCS.conf_felis_censor(args)
 	config.censor = args.cycle_config.current_option
 end
 
+local keytable = {"j_elle_sophie","j_elle_fallen"}
 SMODS.current_mod.menu_cards = function()
     return {
 		{
-			key = "j_elle_fallen",
-			no_edition = true,
-			
+			key = keytable[math.random(1,2)], -- using math.random as the game seed hasn't been set yet, so it'd otherwise be the same every time
+			no_edition = true
 		},
 		
 		func = function()
 			for k, v in pairs(G.title_top.cards) do
-				if v.config.center.key == 'j_elle_fallen' and config.scaling_art.sophie then
-					G.E_MANAGER:add_event(Event{delay = 2, func=function()
-						for i = 1, 6, 1 do
-							G.E_MANAGER:add_event(Event{trigger="after",delay = .5+(i-1)*.1, func=function()
-								v.ability.extra.charges = v.ability.extra.charges+1
+				if v.config.center.key == 'j_elle_sophie' or v.config.center.key == 'j_elle_fallen' then
+					if config.scaling_art.sophie then
+						G.E_MANAGER:add_event(Event{delay = 2, func=function()
+							-- get fatter
+							for i = 1, 5, 1 do
+								G.E_MANAGER:add_event(Event{trigger="after",delay = .5, func=function()
+									v.ability.extra.charges = v.ability.extra.charges+1
+									v:juice_up()
+									play_sound("tarot1")
+								return true end})
+							end
+							delay(2)
+							-- buildup
+							for i = 1, 7, 1 do
+								G.E_MANAGER:add_event(Event{trigger="after",delay = .2, func=function()
+									v:juice_up()
+									play_sound("cardSlide1",0.4+i*.1)
+								return true end})
+							end
+							-- wardrobe malfunction >:3
+							G.E_MANAGER:add_event(Event{trigger="after",delay = .25, func=function()
 								v:juice_up()
-								play_sound(i==6 and "tarot1" or "tarot2")
+								play_sound("explosion_release1")
+								v.ability.extra.charges = 6
 							return true end})
-						end
-					return true end})
-					
+						return true end})
+						
+					else v.ability.extra.charges = 6 end
 				end
 			end
 		end
